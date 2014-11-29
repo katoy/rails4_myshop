@@ -66,10 +66,19 @@ def show_tree(root, level = 0)
   end
 end
 
+# category 以下のすべての item を得る
+def get_all_items(root)
+  ans = root.items
+  root.childs.each do |child|
+    ans += get_all_items(child)
+  end
+  ans
+end
+
 describe "sample" do
   specify "sample" do
     setup
-    root = Category.where(name: 'root')[0]
+    root = Category.where(name: 'root').first
     show_tree(root)
 
     item_1 = Item.where(name: 'item_1').first
@@ -80,5 +89,12 @@ describe "sample" do
 
     item_3 = Item.where(name: 'item_3').first
     expect(item_3.category.name).to eq('book_2')
+
+    items = get_all_items(root).map{|x| x.name}.sort
+    expect(items).to eq(['item_1', 'item_2', 'item_3'])
+
+    book_2 = Category.where(name: 'book_2').first
+    items = get_all_items(book_2).map{|x| x.name}
+    expect(items).to eq(['item_3'])
   end
 end
