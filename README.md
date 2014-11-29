@@ -5,7 +5,7 @@ ActiveRecord で nest した Category 構造を作る例です。
     $ cd rails4_myshop
 
     $ rails g scaffold Category name:string parent_id:integer
-	$ rails g scaffold Item name:string catgory_id:integer
+	$ rails g scaffold Item name:string category_id:integer
 	$ rake db.migrate
 
     $ rm test.sqlite3
@@ -23,7 +23,7 @@ ActiveRecord で nest した Category 構造を作る例です。
     Finished in 0.0736 seconds (files took 2.77 seconds to load)
     1 example, 0 failures
 
-spec/samle.rb の中で、 Category の階層を構築し、item に category を設定しています。
+spec/sample.rb の中で、 Category の階層を構築し、item に category を設定しています。
 そして、Category の階層構造を stdout に出力しています。  
 
 rspec を実行した後に、
