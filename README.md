@@ -102,6 +102,22 @@ irem が属するカテゴリーを確認する。
     | 10 | book_2 | 2         | 2014-11-29 09:50:38 UTC | 2014-11-29 09:50:38 UTC |
     +----+--------+-----------+-------------------------+-------------------------+
 
+
+Factorygirl + rspec
+
+    $ bundle exec rake test:prepare
+    $ bundle exec rspec
+
+DB の設定
+
+    $ bundle exec rake db:seed
+    $ rails c
+
+TODO
+
+- jstree をつかって category の tree 表示、編集 を web 画面からできるようにする事。
+
+
 参考：
 - [Ruby on Railsで同一モデルでhas_many,belongs_toを実現する](http://web.sfc.keio.ac.jp/~t11240rk/blog/?p=242)
 
