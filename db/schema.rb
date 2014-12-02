@@ -14,17 +14,23 @@
 ActiveRecord::Schema.define(version: 20141129045649) do
 
   create_table "categories", force: true do |t|
-    t.string   "name"
+    t.string   "code",       null: false
+    t.string   "name",       null: false
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "categories", ["code"], name: "index_categories_on_code"
+
   create_table "items", force: true do |t|
-    t.string   "name"
+    t.string   "code",        null: false
+    t.string   "name",        null: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "items", ["code"], name: "index_items_on_code"
 
 end

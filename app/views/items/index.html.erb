@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Code</th>
       <th>Name</th>
       <th>Category</th>
       <th colspan="3"></th>
@@ -12,6 +13,7 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
+        <td><%= item.code %></td>
         <td><%= item.name %></td>
         <td><%= item.category %></td>
         <td><%= link_to 'Show', item %></td>

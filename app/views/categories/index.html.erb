@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Code</th>
       <th>Name</th>
       <th>Parent</th>
       <th colspan="3"></th>
@@ -12,6 +13,7 @@
   <tbody>
     <% @categories.each do |category| %>
       <tr>
+        <td><%= category.code %></td>
         <td><%= category.name %></td>
         <td><%= category.parent_id %></td>
         <td><%= link_to 'Show', category %></td>
