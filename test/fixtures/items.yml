@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  catgory: 1
+  code: 'xxxx-0001'
+  name: 'item-001'
+  category: 'キッズ'
 
 two:
-  name: MyString
-  catgory: 1
+  code: 'xxxx-0002'
+  name: 'item-001'
+  category: 'キッズ'

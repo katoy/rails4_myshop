@@ -1,9 +1,41 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+root:
+  id: 1
+  code: '000000'
+  name: 'root'
 
-one:
-  name: MyString
-  parent: 1
+<% # root のカテゴリー
+   #---------------------
+   {メンズ: 10000, レディース: 20000, キッズ:   30000, インテリア: 40000,           家電製品:  50000,
+     本:    60000, チケット:   70000, おもちゃ: 80000, エンターテインメント: 90000, スポーツ: 100000}.each do |key, val| %>
+<%= key %>:
+  code: '<%= format('%06d', val) %>'
+  name: '<%= key %>'
+  parent_id: 1
+<% end %>
 
-two:
-  name: MyString
-  parent: 1
+<% # メンズ の子カテゴリー
+   #---------------------
+   {トップス: 100100, アウター: 100200, パンツ: 100300, 靴: 100400, 帽子: 100500, その他: 100600}.each do |key, val| %>
+<%= "mens_#{key}" %>:
+  code: '<%= format('%06d', val) %>'
+  name: '<%= key %>'
+  parent_id: <%= ActiveRecord::Fixtures.identify(:メンズ) %>
+<% end %>
+<% # メンズ - 帽子 の子カテゴリー
+   #---------------------
+   {シルクハット: 100510, ハンチング: 100520, ベレー帽: 100520, その他: 100530}.each do |key, val| %>
+<%= "mens_帽子_#{key}" %>:
+  code: '<%= format('%06d', val) %>'
+  name: '<%= key %>'
+  parent_id: <%= ActiveRecord::Fixtures.identify(:mens_帽子) %>
+<% end %>
+
+<% # レディース の子カテゴリー
+   #---------------------
+   {トップス: 200100, アウター: 200200, パンツ: 200300}.each do |key, val| %>
+<%= "ladies_#{key}" %>:
+  code: '<%= format('%06d', val) %>'
+  name: '<%= key %>'
+  parent_id: <%= ActiveRecord::Fixtures.identify(:レディース) %>
+<% end %>

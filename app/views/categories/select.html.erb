@@ -1,0 +1,45 @@
+<h1>カテゴリーをドロップダウンリストで選択する</h1>
+
+<div>
+  <a href="/categories"> カテゴリーを一覧表示する</a>
+　
+  <a href="/categories/tree"> カテゴリーをツリー表示する</a>
+</div>
+<br>
+<%= form_for :category, url: {action: "select"}, html: {method: "get"} do |f| %>
+  <%= f.select :code, options_for_select(@categories.collect { |category|
+      [category.name, category.code] }), {}, { id: 'category_select' } %>
+  <%= f.select :child_code, options_for_select(@childs.collect { |child|
+      [child.name, child.id] }), {}, { id: 'child_select' } %>
+<% end %>
+
+<script>
+  $(function () {
+    $(document).on('change', '#category_select', function(evt) {
+      $.ajax({
+        type: 'GET',
+        url: 'categoreis/list',
+        dataType: 'json',
+        data: {
+          code: $("#category_select option:selected").val()
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("AJAX Error: " + textStatus);
+        },
+        success: function(data, textStatus, jqXHR) {
+          $("#child_select").empty();
+          if (data.length == 0) {
+            $("#child_select").hide();
+          } else {
+            $("#child_select").show();
+          }
+          $.each(data, function(idx, item) {
+            // console.log("" + item.code + ":" + item.name);
+            $("#child_select").append('<option value="' + item.code + '">' + item.name + '</option>');
+          });
+          console.log("Dynamic country select OK!");
+        }
+      });
+    });
+  });
+</script>

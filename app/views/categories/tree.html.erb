@@ -1,0 +1,74 @@
+
+<h1>Tree</h1>
+
+<div>
+  <a href="/categories/select"> カテゴリーをドロップダウンリストで選択する</a>
+　
+  <a href="/categories"> カテゴリーを一覧表示する</a>
+</div>
+<br>
+
+<div>
+  tree 表示の参考情報:
+  <a href="http://www.jstree.com/">jstree</a>、
+  <a href="https://github.com/katoy/rails-jstree">jstree プラグインの利用例</a>
+</div>
+
+
+<div class="tree">
+  <input type="text" id="categories-tree-q" style="margin:8px; border-radius:4px;" placeholder="try css"></input>(部分一致で逐次選択します) [現状は動作しない。debug 中...]
+  <div id="categories-tree"></div>
+</div>
+
+<script>
+  $(function () {
+    $("#categories-tree").jstree({
+      core: {
+        data: {
+          url: function (node) {
+            return "treeData.json";
+          },
+          data: function (node) {
+            return { "id": node.id };
+          },
+          check_callback: true,
+          error: function (jqXHR, textStatus, errorThrown) {
+            alert("error. " + qXHR.responseText);
+          }
+        },
+        themes: {
+          responsive: false,
+          variant: "small",
+          stripes: true
+        },
+        plugins: [ "types",  "search", "wholerow" ]
+      }
+  });
+
+    // 検索処理
+    var timeout = false;
+    $("#categories-tree-q").keyup(function () {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      timeout = setTimeout(function () {
+        var v = $('#categories-tree-q').val();
+        $("#categories-tree").jstree(true).search(v);
+      }, 250);
+    });
+
+    // クリックで tree の expand / collapse
+    $("#categories-tree").bind("select_node.jstree", function (e, data) {
+      return data.instance.toggle_node(data.node);
+    });
+
+    // 末端要素をクリックしたときのアクション
+    $("#categories-tree").on("changed.jstree", function (e, data) {
+      console.log(data.selected);
+      $("#selected").text(data.selected);
+      if (data.node.original.type == 'file') {
+        alert(data.node.original.code + ":" + data.node.original.text)
+      }
+    });
+  });
+</script>

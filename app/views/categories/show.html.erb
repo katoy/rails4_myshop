@@ -11,8 +11,12 @@
 </p>
 
 <p>
-  <strong>Parent:</strong>
-  <%= @category.parent_id %>
+  <strong>Parents:</strong>
+  <%-
+     strs = []
+     @parents.each {|p| strs << p.name }
+  -%>
+  <%= strs.join(' ->') %>
 </p>
 
 <%= link_to 'Edit', edit_category_path(@category) %> |

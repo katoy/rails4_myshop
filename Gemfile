@@ -15,6 +15,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'twitter-bootswatch-rails'
+
+gem 'guard-bundler'
 
 group :test, :development do
   gem 'pry-rails'

@@ -1,3 +1,6 @@
 // Place all the styles related to the Categories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#categories_tree .folder { background:image-url('file_sprite.png') right bottom no-repeat; }
+#categories_tree .file   { background:image-url('file_sprite.png') 0 0 no-repeat; }
